@@ -1,0 +1,39 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API Document practice",
+        "title": "Golang Swagger API Document",
+        "termsOfService": "Document content",
+        "contact": {
+            "name": "API supporter",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "license",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "version1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/test/": {
+            "get": {
+                "description": "test api detail",
+                "consumes": [
+                    "application/x-json-stream"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "not require",
+                        "name": "none",
+                        "in": "query"
+                    }
+                ],
+                "responses": {}
+            }
+        }
+    }
+}
