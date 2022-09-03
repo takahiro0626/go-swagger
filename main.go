@@ -31,6 +31,8 @@ func main() {
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 
 	r.GET("/users", searchUsers)
+	r.GET("/users/:id", findUserById)
+
 	r.Run()
 }
 
@@ -44,7 +46,13 @@ type UsersResponse struct {
 	Users interface{} `json: "users"`
 }
 
+type ErrorResponse struct {
+    Code    int    `json:"code"`
+    Message string `json:"message"`
+}
+
 // searchUsers
+// @Summary return users
 // @description return users
 // @version 1.0
 // @tags users
@@ -54,6 +62,26 @@ type UsersResponse struct {
 // @param age query int false "age"
 // @router /users [get]
 // @Success 200 {object} UsersResponse{users=[]User}
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Failure 422 {object} ErrorResponse
 func searchUsers(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"users": "ok"})
+}
+
+// findUserById
+// @Summary return user by user_id
+// @description return user by user_id
+// @version 1.0
+// @tags users
+// @produce json
+// @accept application/json
+// @param user_id path int true "user_id"
+// @router /user/:user_id [get]
+// @Success 200 {object} User
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Failure 422 {object} ErrorResponse
+func findUserById(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"user": "ok"})
 }

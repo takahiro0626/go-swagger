@@ -1,5 +1,12 @@
 basePath: /
 definitions:
+  main.ErrorResponse:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
   main.User:
     properties:
       age:
@@ -30,6 +37,39 @@ info:
   title: Golang Swagger API Document
   version: version1.0
 paths:
+  /user/:user_id:
+    get:
+      consumes:
+      - application/json
+      description: return user by user_id
+      parameters:
+      - description: user_id
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+      summary: return user by user_id
+      tags:
+      - users
   /users:
     get:
       consumes:
@@ -58,6 +98,19 @@ paths:
                     $ref: '#/definitions/main.User'
                   type: array
               type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+      summary: return users
       tags:
       - users
 swagger: "2.0"
