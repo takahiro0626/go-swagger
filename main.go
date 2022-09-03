@@ -3,10 +3,11 @@ package main
 import (
 	"net/http"
 
+	_ "go-swagger/docs"
+
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	_ "go-swagger/docs"
 )
 
 // @title Golang Swagger API Document
@@ -29,15 +30,30 @@ func main() {
 	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 
-	r.GET("/test", test)
+	r.GET("/users", searchUsers)
 	r.Run()
 }
 
-// @description test api detail
+type User struct {
+	ID   int    `json:"id" example:"1"`
+	Name string `json:"name" example:"test"`
+	Age  int    `json:"age" example:"20"`
+}
+
+type UsersResponse struct {
+	Users interface{} `json: "users"`
+}
+
+// searchUsers
+// @description return users
 // @version 1.0
-// @accept application/x-json-stream
-// @param none query string false "not require"
-// @router /test/ [get]
-func test(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{"msg": "ok"})
+// @tags users
+// @produce json
+// @accept application/json
+// @param name query string false "name"
+// @param age query int false "age"
+// @router /users [get]
+// @Success 200 {object} UsersResponse{users=[]User}
+func searchUsers(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"users": "ok"})
 }

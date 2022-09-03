@@ -1,4 +1,21 @@
 basePath: /
+definitions:
+  main.User:
+    properties:
+      age:
+        example: 20
+        type: integer
+      id:
+        example: 1
+        type: integer
+      name:
+        example: test
+        type: string
+    type: object
+  main.UsersResponse:
+    properties:
+      users: {}
+    type: object
 host: localhost:8080
 info:
   contact:
@@ -13,15 +30,34 @@ info:
   title: Golang Swagger API Document
   version: version1.0
 paths:
-  /test/:
+  /users:
     get:
       consumes:
-      - application/x-json-stream
-      description: test api detail
+      - application/json
+      description: return users
       parameters:
-      - description: not require
+      - description: name
         in: query
-        name: none
+        name: name
         type: string
-      responses: {}
+      - description: age
+        in: query
+        name: age
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.UsersResponse'
+            - properties:
+                users:
+                  items:
+                    $ref: '#/definitions/main.User'
+                  type: array
+              type: object
+      tags:
+      - users
 swagger: "2.0"
