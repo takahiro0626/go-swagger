@@ -16,6 +16,15 @@ definitions:
       message:
         type: string
     type: object
+  main.UpdateUserRequest:
+    properties:
+      age:
+        example: 21
+        type: integer
+      name:
+        example: test-name
+        type: string
+    type: object
   main.User:
     properties:
       age:
@@ -119,7 +128,31 @@ paths:
       summary: create user
       tags:
       - users
-  /users/:user_id:
+  /users/{user_id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete user by user_id
+      parameters:
+      - description: user_id
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/main.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+      summary: delete user by user_id
+      tags:
+      - users
     get:
       consumes:
       - application/json
@@ -150,6 +183,41 @@ paths:
           schema:
             $ref: '#/definitions/main.ErrorResponse'
       summary: return user by user_id
+      tags:
+      - users
+    put:
+      consumes:
+      - application/json
+      - application/json
+      description: update user
+      parameters:
+      - description: user_id
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      - description: user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/main.UpdateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+      summary: update user
       tags:
       - users
 swagger: "2.0"
