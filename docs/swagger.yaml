@@ -101,7 +101,6 @@ paths:
     post:
       consumes:
       - application/json
-      - application/json
       description: create user
       parameters:
       - description: user
@@ -187,7 +186,6 @@ paths:
       - users
     put:
       consumes:
-      - application/json
       - application/json
       description: update user
       parameters:

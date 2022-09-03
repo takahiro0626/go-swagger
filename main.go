@@ -104,7 +104,6 @@ func findUserById(c *gin.Context) {
 // @description create user
 // @version 1.0
 // @tags users
-// @Accept  json
 // @produce json
 // @accept application/json
 // @param user body CreateUserRequest true "user"
@@ -121,7 +120,6 @@ func createUser(c *gin.Context) {
 // @description update user
 // @version 1.0
 // @tags users
-// @Accept  json
 // @produce json
 // @accept application/json
 // @param user_id path int true "user_id"

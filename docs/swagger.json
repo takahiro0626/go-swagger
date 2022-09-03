@@ -90,7 +90,6 @@
             "post": {
                 "description": "create user",
                 "consumes": [
-                    "application/json",
                     "application/json"
                 ],
                 "produces": [
@@ -185,7 +184,6 @@
             "put": {
                 "description": "update user",
                 "consumes": [
-                    "application/json",
                     "application/json"
                 ],
                 "produces": [

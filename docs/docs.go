@@ -97,7 +97,6 @@ const docTemplate = `{
             "post": {
                 "description": "create user",
                 "consumes": [
-                    "application/json",
                     "application/json"
                 ],
                 "produces": [
@@ -192,7 +191,6 @@ const docTemplate = `{
             "put": {
                 "description": "update user",
                 "consumes": [
-                    "application/json",
                     "application/json"
                 ],
                 "produces": [
